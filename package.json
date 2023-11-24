@@ -1,0 +1,39 @@
+{
+  "name": "lynksen-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development next dev",
+    "build": "cross-env NODE_ENV=production next build && next export",
+    "start": "next start",
+    "type-check": "tsc",
+    "lint": "next lint --fix",
+    "format": "prettier . --write"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@headlessui/react": "^1.7.15",
+    "@headlessui/tailwindcss": "^0.1.3",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@rehooks/window-size": "^1.0.2",
+    "@types/react": "^18.2.38",
+    "autoprefixer": "^10.4.14",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "eslint-config-next": "13.2.4",
+    "framer-motion": "^10.16.4",
+    "module-alias": "^2.2.3",
+    "next": "13.1.1",
+    "postcss": "^8.4.24",
+    "prettier-plugin-tailwindcss": "^0.3.0",
+    "react-dom": "18.2.0",
+    "react-redux": "^8.1.3",
+    "sass": "^1.63.3"
+  },
+  "devDependencies": {
+    "@types/node": "20.9.4"
+  }
+}

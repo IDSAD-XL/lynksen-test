@@ -49,6 +49,7 @@ module.exports = {
       backgroundColor: {
         primary: 'var(--white)',
         secondary: 'var(--bg-secondary)',
+        dark: 'var(--dark-primary)'
       },
       colors: {
         white: 'var(--white)',

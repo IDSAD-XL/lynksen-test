@@ -23,6 +23,7 @@ body {
     --accent-primary: #8C6CED;
     --gray-primary: #A0AEC0;
     --gray-secondary: #C8CCDD;
+    --dark-primary: #201e20;
 }
 
 ::-webkit-scrollbar {

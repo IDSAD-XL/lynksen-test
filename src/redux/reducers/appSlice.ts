@@ -1,12 +1,14 @@
 'use client'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface IAppState {
   menuOpen: boolean
+  activeId: string | null
 }
 
 const initialState: IAppState = {
   menuOpen: false,
+  activeId: null,
 }
 
 export const appSlice = createSlice({
@@ -18,6 +20,9 @@ export const appSlice = createSlice({
     },
     closeMenu(state) {
       state.menuOpen = false
+    },
+    setActiveItem(state, action: PayloadAction<string>) {
+      state.activeId = action.payload
     },
   },
 })

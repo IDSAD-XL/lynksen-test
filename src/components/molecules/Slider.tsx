@@ -1,10 +1,27 @@
 import { motion } from 'framer-motion'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Image as CatsImageType } from '@thatapicompany/thecatapi/dist/types'
+import Image from 'next/image'
+import { useAppDispatch } from '@hooks/redux'
+import { setActiveItem } from '@redux/actions/appActions'
+import BigSlidingImage from '@components/atoms/BigSlidingImage'
 
-const Slider = () => {
+export interface ISlider {
+  items: CatsImageType[]
+}
+
+const Slider: React.FC<ISlider> = ({ items }) => {
   const [sliderScrollY, setSliderScrollY] = useState(0)
   const sliderRef = React.useRef<HTMLDivElement | null>(null)
   const [isActive, setIsActive] = useState(false)
+  const appDispatch = useAppDispatch()
+  const [activeImage, setActiveImage] = useState<string | null>(null)
+
+  const handleClickOnItem = useCallback((item: CatsImageType) => {
+    setActiveImage(item.url)
+    setActiveItem(appDispatch, item.id)
+    setIsActive(true)
+  }, [])
 
   const handleScroll = useCallback((e: React.WheelEvent) => {
     const maxVal = sliderRef.current?.scrollHeight
@@ -26,32 +43,26 @@ const Slider = () => {
     }
   }, [])
 
+  useEffect(() => {
+    setSliderScrollY(400)
+  }, [])
+
   return (
     <div className="relative">
       <div className="absolute flex justify-center w-full h-[120%]">
-        <motion.div
-          variants={{
-            initial: {
-              width: '100%',
-            },
-            hidden: {
-              width: 0,
-            },
-          }}
-          transition={{
-            delay: 0,
-            duration: 0.5,
-            ease: 'easeOut',
-          }}
-          animate={isActive ? 'initial' : 'hidden'}
-          onClick={() => {
-            setIsActive(false)
-          }}
-          className="flex-shrink-0 bg-green-600 h-full z-30"
-        ></motion.div>
+        {activeImage && (
+          <BigSlidingImage
+            image={activeImage}
+            isActive={isActive}
+            setIsActive={setIsActive}
+          />
+        )}
       </div>
       <motion.div
         ref={sliderRef}
+        initial={{
+          y: '100%',
+        }}
         animate={{
           y: `${sliderScrollY}px`,
         }}
@@ -60,7 +71,7 @@ const Slider = () => {
           stiffness: 20,
         }}
         onWheel={handleScroll}
-        className="flex w-[500px] justify-between"
+        className="flex gap-x-[50px] w-[600px] justify-between"
       >
         <motion.div
           variants={{
@@ -73,23 +84,31 @@ const Slider = () => {
           }}
           transition={{
             delay: 0,
-            duration: 0.5,
+            duration: 0.8,
             ease: 'easeOut',
           }}
           animate={isActive ? 'hidden' : 'initial'}
-          className="flex relative flex-col w-[50%] gap-y-[40px] pr-[20px]"
+          className="flex relative flex-col w-[50%] gap-y-[30px]"
         >
-          {[...Array(5)].map((_, i) => (
-            <div
-              onClick={() => {
-                setIsActive(true)
-              }}
-              key={i}
-              className="bg-red-500 w-full h-[300px]"
-            ></div>
-          ))}
+          {items
+            .filter((_, idx) => idx % 2)
+            .map((catItem) => (
+              <div
+                onClick={() => {
+                  handleClickOnItem(catItem)
+                }}
+                key={catItem.id}
+                className="w-full h-[400px] relative overflow-hidden cursor-pointer"
+              >
+                <Image
+                  src={catItem.url}
+                  fill={true}
+                  alt=""
+                  className="object-cover h-full"
+                />
+              </div>
+            ))}
         </motion.div>
-
         <motion.div
           variants={{
             initial: {
@@ -101,21 +120,30 @@ const Slider = () => {
           }}
           transition={{
             delay: 0,
-            duration: 0.5,
+            duration: 0.8,
             ease: 'easeOut',
           }}
           animate={isActive ? 'hidden' : 'initial'}
-          className="flex relative flex-col w-[50%] gap-y-[40px] pl-[20px] pt-[150px]"
+          className="flex relative flex-col w-[50%] gap-y-[30px] mt-[150px]"
         >
-          {[...Array(5)].map((_, i) => (
-            <div
-              onClick={() => {
-                setIsActive(true)
-              }}
-              key={i}
-              className="bg-red-500 w-full h-[300px]"
-            ></div>
-          ))}
+          {items
+            .filter((_, idx) => !(idx % 2))
+            .map((catItem) => (
+              <div
+                onClick={() => {
+                  handleClickOnItem(catItem)
+                }}
+                key={catItem.id}
+                className="w-full h-[400px] relative overflow-hidden cursor-pointer"
+              >
+                <Image
+                  src={catItem.url}
+                  fill={true}
+                  alt=""
+                  className="object-cover h-full"
+                />
+              </div>
+            ))}
         </motion.div>
       </motion.div>
     </div>

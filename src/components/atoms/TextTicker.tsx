@@ -19,7 +19,7 @@ const TextTicker: React.FC<ITextTicker> = ({ text, state = 'visible' }) => {
         variants={{
           visible: {
             y: 0,
-            x: ['100%', '-100%'],
+            x: ['0%', '-100%'],
           },
           hidden: {
             x: 0,
@@ -48,7 +48,7 @@ const TextTicker: React.FC<ITextTicker> = ({ text, state = 'visible' }) => {
         variants={{
           visible: {
             y: 0,
-            x: ['100%', '-100%'],
+            x: ['50%', '-50%'],
           },
           hidden: {
             x: 0,

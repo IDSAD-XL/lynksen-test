@@ -10,7 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: npm ci
-      - run: npx cross-env CATS_API_KEY=${{ secrets.CAT_API_KEY }} NODE_ENV=production next build && next export
+      - run: npx cross-env CATS_API_KEY=${{ secrets.CAT_API_KEY }} NODE_ENV=production next build
+      - run: next export
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

@@ -13,6 +13,7 @@ module.exports = {
       dsk: '1351px',
       xl: '1601px',
       xxl: '1920px',
+      '2xl': '2300px',
     },
     container: {
       padding: {

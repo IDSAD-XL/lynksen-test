@@ -19,7 +19,7 @@ const Loader: React.FC<ILoader> = ({ images }) => {
   }, [appDispatch])
 
   return (
-    <div className="main-page-perspective absolute left-0 top-0 flex min-h-screen w-screen items-center overflow-hidden bg-dark">
+    <div className="main-page-perspective absolute left-0 top-0 flex min-h-screen w-screen items-center justify-center overflow-hidden bg-dark">
       <motion.div
         initial={{
           y: '100%',
@@ -57,7 +57,7 @@ const Loader: React.FC<ILoader> = ({ images }) => {
               animate={{
                 rotate: [rotateValue, 0, 0, -rotateValue],
                 transition: {
-                  delay: 2 + (images.length - idx) * 0.05,
+                  delay: 2.3 + (images.length - idx) * 0.05,
                   ease: 'easeInOut',
                   duration: 4,
                 },

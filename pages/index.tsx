@@ -24,6 +24,7 @@ const Index = () => {
         keyName: activeCatsQuery.data.id,
         title: activeCatsQuery.data?.breeds?.[0].name,
         description: activeCatsQuery.data?.breeds?.[0].description,
+        hasSocials: false,
         itemsClassPrefix: 'cat',
       }
     } else {
@@ -53,6 +54,7 @@ const Index = () => {
               <MainPage
                 images={randomCatsQuery.data}
                 textsBlock={textsBlockContent}
+                textTicker={mainPage.textTicker}
               />
             </motion.div>
           )}

@@ -55,7 +55,7 @@ const Slider: React.FC<ISlider> = ({ items }) => {
   }, [])
 
   return (
-    <div className="relative">
+    <div className="relative h-screen">
       <div className="absolute flex h-[120%] w-full justify-center">
         <BigSlidingImage
           image={activeImage ?? ''}

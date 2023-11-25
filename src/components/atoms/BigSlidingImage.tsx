@@ -31,9 +31,9 @@ const BigSlidingImage: React.FC<IBigSlidingImage> = ({
       onClick={() => {
         handleClick()
       }}
-      className="flex-shrink-0 h-full z-30 relative"
+      className="relative z-30 h-full flex-shrink-0"
     >
-      <div className="w-full h-full relative overflow-hidden">
+      <div className="relative h-full w-full overflow-hidden">
         <motion.img
           initial={{
             scale: 1,
@@ -59,7 +59,7 @@ const BigSlidingImage: React.FC<IBigSlidingImage> = ({
           }}
           src={image}
           alt={''}
-          className="min-h-[120%] min-w-[120%] right-[-10%] object-cover object-center origin-center absolute"
+          className="absolute right-[-5%] min-h-full min-w-[110%] origin-center object-cover object-center"
         />
       </div>
     </motion.div>

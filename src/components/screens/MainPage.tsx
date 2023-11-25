@@ -79,10 +79,10 @@ const MainPage: React.FC<IMainPage> = ({ images, textsBlock }) => {
           </AnimatePresence>
         </div>
       </div>
-      <div className="absolute right-[100px] z-20 h-full translate-y-[-5%] rotate-[-8deg]">
+      <div className="absolute right-[100px] z-20 h-full translate-y-[-5%] rotate-[-8deg] xxl:right-[400px]">
         {images && <Slider items={images} />}
       </div>
-      <div className="absolute bottom-[100px] z-10 flex flex-col justify-end pb-[100px] pl-[150px]">
+      <div className="absolute bottom-[40px] z-10 flex flex-col justify-end pb-[100px] pl-[150px] xxl:bottom-[100px]">
         {mainPage.textsBlock && (
           <TextLinesBlock
             key={'default'}
@@ -91,7 +91,7 @@ const MainPage: React.FC<IMainPage> = ({ images, textsBlock }) => {
           />
         )}
       </div>
-      <div className="absolute bottom-[100px] flex flex-col justify-end pb-[100px] pl-[150px]">
+      <div className="absolute bottom-[40px] flex flex-col justify-end pb-[100px] pl-[150px] xxl:bottom-[100px]">
         {textsBlock && textsBlock.keyName !== 'default' && (
           <TextLinesBlock
             key={textsBlock.keyName}

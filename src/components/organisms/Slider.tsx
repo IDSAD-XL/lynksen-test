@@ -56,7 +56,7 @@ const Slider: React.FC<ISlider> = ({ items }) => {
 
   return (
     <div className="relative h-screen">
-      <div className="absolute flex h-[120%] w-full justify-center">
+      <div className="absolute flex h-[110%] w-full justify-center">
         <BigSlidingImage
           image={activeImage ?? ''}
           isActive={isActive}
@@ -76,7 +76,7 @@ const Slider: React.FC<ISlider> = ({ items }) => {
           stiffness: 20,
         }}
         onWheel={handleScroll}
-        className="flex w-[600px] justify-between gap-x-[50px] overflow-hidden"
+        className="flex w-[700px] justify-between gap-x-[50px] overflow-hidden xxl:w-[800px]"
       >
         <motion.div
           variants={{
@@ -103,7 +103,7 @@ const Slider: React.FC<ISlider> = ({ items }) => {
                   handleClickOnItem(catItem)
                 }}
                 key={catItem.id}
-                className="relative h-[400px] w-full cursor-pointer overflow-hidden"
+                className="relative h-[400px] w-full cursor-pointer overflow-hidden xxl:h-[600px]"
               >
                 <Image
                   src={catItem.url}
@@ -139,7 +139,7 @@ const Slider: React.FC<ISlider> = ({ items }) => {
                   handleClickOnItem(catItem)
                 }}
                 key={catItem.id}
-                className="relative h-[400px] w-full cursor-pointer overflow-hidden"
+                className="relative h-[400px] w-full cursor-pointer overflow-hidden xxl:h-[600px]"
               >
                 <Image
                   src={catItem.url}

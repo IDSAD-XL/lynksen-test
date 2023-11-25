@@ -12,6 +12,7 @@ module.exports = {
       lg: '976px',
       dsk: '1351px',
       xl: '1601px',
+      xxl: '1920px',
     },
     container: {
       padding: {
@@ -49,7 +50,7 @@ module.exports = {
       backgroundColor: {
         primary: 'var(--white)',
         secondary: 'var(--bg-secondary)',
-        dark: 'var(--dark-primary)'
+        dark: 'var(--dark-primary)',
       },
       colors: {
         white: 'var(--white)',
@@ -62,8 +63,8 @@ module.exports = {
         1: '1px',
       },
       borderColor: {
-        'primary': 'var(--gray-primary)',
-        'secondary': 'var(--accent-primary)',
+        primary: 'var(--gray-primary)',
+        secondary: 'var(--accent-primary)',
       },
       boxShadow: {
         none: 'none',

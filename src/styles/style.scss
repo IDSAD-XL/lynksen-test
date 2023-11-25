@@ -3,6 +3,7 @@
 /* Layout */
 /* Atoms */
 /* Molecules */
+@import "modules/molecules/cylindricalText";
 /* Organisms */
 
 * {
@@ -15,6 +16,7 @@ body {
   background: #ffffff;
   min-height: 100vh;
   min-height: 100svh;
+  overflow: hidden;
 }
 
 #__next {

@@ -2,11 +2,16 @@ import { motion } from 'framer-motion'
 import React from 'react'
 
 export interface ISlideUpLineProps {
-  text: string
+  text?: string
+  children?: React.ReactNode
   classPrefix: string
 }
 
-const SlideUpLine: React.FC<ISlideUpLineProps> = ({ text, classPrefix }) => {
+const SlideUpLine: React.FC<ISlideUpLineProps> = ({
+  text,
+  children,
+  classPrefix,
+}) => {
   return (
     <div className="overflow-hidden">
       <motion.div
@@ -15,7 +20,8 @@ const SlideUpLine: React.FC<ISlideUpLineProps> = ({ text, classPrefix }) => {
         }}
         className={`${classPrefix}-slide-up-text`}
       >
-        {text}
+        {children && <>{children}</>}
+        {!children && text && <>{text}</>}
       </motion.div>
     </div>
   )

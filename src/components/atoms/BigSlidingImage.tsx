@@ -33,7 +33,7 @@ const BigSlidingImage: React.FC<IBigSlidingImage> = ({
       }}
       className="relative z-30 h-full flex-shrink-0"
     >
-      <div className="relative h-full w-full overflow-hidden">
+      <div className="relative h-full w-full cursor-pointer overflow-hidden">
         <motion.img
           initial={{
             scale: 1,

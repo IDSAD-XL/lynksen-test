@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Image as CatsImageType } from '@thatapicompany/thecatapi/dist/types'
 import Image from 'next/image'
 import { useAppDispatch } from '@hooks/redux'
-import { setActiveItem } from '@redux/actions/appActions'
+import { changeAppState, setActiveItem } from '@redux/actions/appActions'
 import BigSlidingImage from '@components/atoms/BigSlidingImage'
 
 export interface ISlider {
@@ -17,11 +17,18 @@ const Slider: React.FC<ISlider> = ({ items }) => {
   const appDispatch = useAppDispatch()
   const [activeImage, setActiveImage] = useState<string | null>(null)
 
-  const handleClickOnItem = useCallback((item: CatsImageType) => {
-    setActiveImage(item.url)
-    setActiveItem(appDispatch, item.id)
-    setIsActive(true)
-  }, [])
+  const handleClickOnBigImage = useCallback(() => {
+    changeAppState(appDispatch, 'loading')
+  }, [appDispatch])
+
+  const handleClickOnItem = useCallback(
+    (item: CatsImageType) => {
+      setActiveImage(item.url)
+      setActiveItem(appDispatch, item.id)
+      setIsActive(true)
+    },
+    [appDispatch]
+  )
 
   const handleScroll = useCallback((e: React.WheelEvent) => {
     const maxVal = sliderRef.current?.scrollHeight
@@ -44,19 +51,17 @@ const Slider: React.FC<ISlider> = ({ items }) => {
   }, [])
 
   useEffect(() => {
-    setSliderScrollY(400)
+    setSliderScrollY(500)
   }, [])
 
   return (
     <div className="relative">
-      <div className="absolute flex justify-center w-full h-[120%]">
-        {activeImage && (
-          <BigSlidingImage
-            image={activeImage}
-            isActive={isActive}
-            setIsActive={setIsActive}
-          />
-        )}
+      <div className="absolute flex h-[120%] w-full justify-center">
+        <BigSlidingImage
+          image={activeImage ?? ''}
+          isActive={isActive}
+          handleClick={handleClickOnBigImage}
+        />
       </div>
       <motion.div
         ref={sliderRef}
@@ -71,15 +76,15 @@ const Slider: React.FC<ISlider> = ({ items }) => {
           stiffness: 20,
         }}
         onWheel={handleScroll}
-        className="flex gap-x-[50px] w-[600px] justify-between"
+        className="flex w-[600px] justify-between gap-x-[50px] overflow-hidden"
       >
         <motion.div
           variants={{
             initial: {
-              width: '50%',
+              x: '0%',
             },
             hidden: {
-              width: 0,
+              x: '-100%',
             },
           }}
           transition={{
@@ -88,7 +93,7 @@ const Slider: React.FC<ISlider> = ({ items }) => {
             ease: 'easeOut',
           }}
           animate={isActive ? 'hidden' : 'initial'}
-          className="flex relative flex-col w-[50%] gap-y-[30px]"
+          className="relative flex w-[50%] flex-col gap-y-[30px]"
         >
           {items
             .filter((_, idx) => idx % 2)
@@ -98,13 +103,13 @@ const Slider: React.FC<ISlider> = ({ items }) => {
                   handleClickOnItem(catItem)
                 }}
                 key={catItem.id}
-                className="w-full h-[400px] relative overflow-hidden cursor-pointer"
+                className="relative h-[400px] w-full cursor-pointer overflow-hidden"
               >
                 <Image
                   src={catItem.url}
                   fill={true}
                   alt=""
-                  className="object-cover h-full"
+                  className="h-full object-cover"
                 />
               </div>
             ))}
@@ -112,10 +117,10 @@ const Slider: React.FC<ISlider> = ({ items }) => {
         <motion.div
           variants={{
             initial: {
-              width: '50%',
+              x: '0%',
             },
             hidden: {
-              width: 0,
+              x: '100%',
             },
           }}
           transition={{
@@ -124,7 +129,7 @@ const Slider: React.FC<ISlider> = ({ items }) => {
             ease: 'easeOut',
           }}
           animate={isActive ? 'hidden' : 'initial'}
-          className="flex relative flex-col w-[50%] gap-y-[30px] mt-[150px]"
+          className="relative mt-[150px] flex w-[50%] flex-col gap-y-[30px]"
         >
           {items
             .filter((_, idx) => !(idx % 2))
@@ -134,13 +139,13 @@ const Slider: React.FC<ISlider> = ({ items }) => {
                   handleClickOnItem(catItem)
                 }}
                 key={catItem.id}
-                className="w-full h-[400px] relative overflow-hidden cursor-pointer"
+                className="relative h-[400px] w-full cursor-pointer overflow-hidden"
               >
                 <Image
                   src={catItem.url}
                   fill={true}
                   alt=""
-                  className="object-cover h-full"
+                  className="h-full object-cover"
                 />
               </div>
             ))}

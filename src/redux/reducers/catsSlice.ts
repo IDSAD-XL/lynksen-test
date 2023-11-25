@@ -33,4 +33,8 @@ export const catsApi = createApi({
   }),
 })
 
-export const { useGetRandomCatsQuery, useGetCatByIdQuery } = catsApi
+export const {
+  useGetRandomCatsQuery,
+  useGetCatByIdQuery,
+  useLazyGetCatByIdQuery,
+} = catsApi
